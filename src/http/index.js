@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from "qs"
 import router from "../router"
-import nprogress from 'nprogress'
+// import nprogress from 'nprogress'
 import "nprogress/nprogress.css"
 import { Message } from 'element-ui'
 
@@ -11,7 +11,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 // 创建一个axios的实例
 const service = axios.create({
   // 基础路径: 需要根据当前的运行环境来判断
-  baseURL: 'http://192.168.123.57:8081',
+  // baseURL: 'http://192.168.123.57:8081',
   // baseURL: isProduction ? 'http://192.168.0.25:8081' : '/api',
   // 超时时间
   timeout: 100000,

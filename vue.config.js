@@ -9,7 +9,7 @@ module.exports = {
     proxy: {
       '/api': {
         ws: false,
-        target: 'http://192.168.123.57:8081',
+        // target: 'http://192.168.123.57:8081',
         // target:'http://192.168.123.57:8081',
         changeOrigin: true,
         pathRewrite: {

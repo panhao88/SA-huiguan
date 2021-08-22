@@ -10,16 +10,15 @@
           @click="handleClick(item, index)"
           @contextmenu="contextmenu"
         >
-          <div class="circle" v-if="activeName === item.name"></div>
-          <div class="item" :class="{ pd: activeName === item.name }">
+          <div class="box">
+            <div class="circle"></div>
             <div class="name">{{ item.name }}</div>
             <div
-              v-if="
-                (activeName === item.name && tabList.length > 1) ||
-                (tabList.length === 1 && item.name !== '首页')
-              "
               class="close"
+              :class="[item.name == flag ? 'back':'']"
               @click="close"
+              @mouseenter="enter(item.name)"
+              @mouseleave="leave(item.name)"
             >
               <i class="el-icon-close"></i>
             </div>
@@ -49,6 +48,7 @@ export default {
   props: {},
   data() {
     return {
+      flag: "",
       activeName: "",
       top: 0,
       left: 0,
@@ -59,6 +59,12 @@ export default {
     draggable,
   },
   methods: {
+    enter(name) {
+        this.flag = name
+    },
+    leave(name) {
+      this.flag = ""
+    },
     ...mapMutations(["setTabList"]),
     handleClick(tab, index) {
       let route = this.$store.state.tabList.find(
@@ -72,16 +78,9 @@ export default {
     },
     contextmenu(e) {
       e.preventDefault();
-      if (this.$parent.$parent.$parent.$parent.is_fold === false) {
-        this.showMenu = true;
-        this.left = e.pageX - 200;
-        this.top = e.pageY + 20;
-      }
-      if (this.$parent.$parent.$parent.$parent.is_fold === true) {
-        this.showMenu = true;
-        this.left = e.pageX - 64;
-        this.top = e.pageY + 20;
-      }
+      this.showMenu = true;
+      this.left = e.pageX;
+      this.top = e.pageY;
     },
     handleClickOutside() {
       this.showMenu = false;
@@ -186,48 +185,45 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
-  padding: 5px;
-  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+  background: #eee;
+  border: 1px solid #ddd;
   .drag {
     display: flex;
   }
   .content {
-    border: 1px solid #ddd;
+    background: #fff;
+    border-right: 1px solid gainsboro;
     font-size: 12px;
-    padding: 2px 10px;
-    margin-right: 5px;
+    padding: 8px 20px;
     display: flex;
     align-items: center;
-    position: relative;
-    z-index: 1;
-    white-space: nowrap;
-    cursor: pointer;
-    .circle {
-      height: 8px;
-      width: 8px;
-      background: #fff;
-      border-radius: 50%;
-      margin-right: 5px;
-    }
-    .item {
-      position: relative;
+    .box {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .circle {
+        height: 8px;
+        width: 8px;
+        background: gray;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
       .close {
-        z-index: 99;
-        position: absolute;
+        padding: 3px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 12px;
-        top: 0;
-        right: -6px;
-        padding-right: 2px;
-        z-index: 2020;
+        margin-left: 8px;
       }
     }
   }
   .active {
-    background: #409eff;
-    color: #fff;
+    color: #409eff;
   }
   .pd {
     padding-right: 10px;
@@ -241,11 +237,12 @@ export default {
   border-radius: 4px;
   font-size: 12px;
   padding: 5px;
-  z-index: 9999;
-  cursor: pointer;
   div {
     padding: 7px 5px;
-    z-index: 9999;
   }
+}
+.back {
+  background: red;
+  color: #fff;
 }
 </style>

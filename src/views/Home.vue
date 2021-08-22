@@ -1,36 +1,25 @@
+
 <template>
-  <div>
-    <div class="container">hello</div>
+  <div class="vue-box">
+    <div class="c-panel">
+      <el-card>
+        <button>home</button>
+      </el-card>
+    </div>
   </div>
 </template>
-
 <script>
-
 export default {
   data() {
     return {};
   },
   components: {},
-    methods: {
-    
-  },
-  mounted() {
-    
-  },
+  methods: {},
+  mounted() {},
   watch: {},
-  computed: {
-    
-  },
+  computed: {},
 };
 </script>
 
 <style lang='scss' scoped>
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 600;
-  top: 20%;
-}
 </style>

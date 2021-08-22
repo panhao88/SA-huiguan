@@ -1,6 +1,12 @@
 <template>
  <div>
-
+      <div class="vue-box">
+    <div class="c-panel">
+      <el-card>
+        订单列表
+      </el-card>
+    </div>
+  </div>
  </div>
 </template>
 
